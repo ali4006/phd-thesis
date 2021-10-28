@@ -1,3 +1,155 @@
 \chapter{Discussion}
 \label{ch:discussion}
 
+The main aim of this thesis was to study the numerical stability of neuroimaging pipelines focusing on the effect
+of operating system variability. For this purpose, we leveraged system call interception techniques, including
+the ReproZip tool and perturbation models such as Monte-Carlo arithmetic (MCA)~\cite{Parker1997-qq} as an extension of
+standard floating-point arithmetic that exploits randomness in basic floating-point operations. 
+With this in mind, this chapter first considers the discussion of the findings and contributions.
+We then discuss the implication of the results and limitations of the current methodology in this work.
+This chapter concludes with recommendations for future studies.
+
+
+\subsection{Thesis findings}
+
+Throughout this thesis, we demonstrated the role of numerical errors in different computational environments in neuroimaging pipelines.
+In Chapter~\ref{ch:c1}, we introduced Spot, a tool to detect the source of numerical differences in pipelines
+executed in different operating systems. 
+This work localized the origin of processes that hamper bitwise reproducibility as the effect of OS updates.
+Among them, we observed registration processes as the highly contributed source of instability in the FSL tool. 
+We found that differences can propagate during the pipeline execution and substantially impact
+the results of the entire pipeline (e.g., segmentations created by FreeSurfer).
+We also captured different results between subjects, showed the sensitivity of the analyses to dataset selection.
+Notably, the irreproducible processes identified by Spot were all associated with dynamically linked executables,
+showing that library updates do not impact statically linked executables.
+
+
+The numerical differences were caused by truncation and round-off errors
+due to the precision limitations of the floating-point arithmetic.
+This is uncontrolled noise that originated from the updates of the system libraries associated with
+dynamically linked executables of the pipeline. Thereby, the observed instability across OSes
+depends on which operating systems are used. This limits the evaluation of the underlying stability of a particular tool.
+
+Thereafter, in Chapter~\ref{ch:c2}, we presented a framework to model the numerical uncertainty induced by OS updates in a control condition using Monte-Carlo arithmetic. 
+We obtained an accurate simulation of OS variability using the FL library in which perturbing mathematical GNU/Linux library (libmath).
+% This suggests that numerical perturbations introduced by OS updates might be in the range of machine error (virtual precision of 53 bits).
+We found that the pipeline could be implemented exclusively with lower precision of floating-point representations (single-precision)
+without loss of results precision. This would substantially decrease the pipeline memory footprint and computational time.
+However, the finding showed a very low number of significant bits, 5 out of 15 available bits.
+This motivates further investigation of the numerical stability of the main components of the tested pipelines, such as linear and non-linear registrations.
+Also, it is notable that OS- and FL-induced variability were on a similar order of magnitude as subject-level effects,
+showing that we applied a reasonable amount of perturbations.
+
+This framework works on the level of the shared libraries, so there is no need for recompilation or modification
+of the pipeline or any other sources.
+We, therefore, believe that pipelines that depend
+on different third-party mathematical libraries could be studied similarly by building fuzzy
+versions of these dependencies. This motivated us to investigate the numerical quality in
+more applications like tool variability using the proposed MCA-based method.
+
+Finally, in Chapter~\ref{ch:c3}, we investigated the type of variability introduced in variations between software packages.
+We compared numerical variability with tool variability across three of the most popular software packages in neuroimaging.
+% This work presents a comparison of numerical and software variability for group-level functional MRI analysis
+We found significant numerical variability that was comparable to tool variability in some brain regions.
+We also found that numerical instability in individual analyses was attenuated in group analyses.
+It is notable that we obtained more uncertainty on thresholded results than unthresholded maps, probably due to
+different thresholds used in different tools.
+% This raises further investigations on thresholding techniques to reduce the associated instabilities.
+
+
+\subsection{The implication of results}
+
+This study was a contribution to uncertainty quantification in medical imaging.
+The numerical error is often neglected or only partially studied due to the associated engineering challenges among
+the various sources of uncertainty involved in medical imaging results, including population selection,
+scanning devices and sequence parameters, acquisition noise, image reconstruction algorithms, and methodological flexibility.
+Our work proposed the methodologies and implementations to address this issue.
+
+The current approach to address numerical instability resulting from OS
+updates is mainly to ignore the issue and sweep it under the rug of %static build of programs, or 
+Docker containers or other types of virtualization. 
+Although building static program and containerization techniques improve
+reproducibility across OSes, but small differences remained.
+It remains that computational results should be understood as realizations of a random variable resulting
+from floating-point arithmetic. The presented techniques in this thesis enable estimating
+result distributions, the initial step toward making analyses reproducible across
+execution environments, including HPC systems, GPU accelerators, or merely
+different workstations.
+
+Results across my thesis showed the significance of numerical instabilities in neuroimaging pipelines
+and demonstrated numerical analysis techniques such as MCA as valuable methods for evaluating the associated variability. 
+Moreover, in related work~\cite{kiar2020numerical}, it has been suggested that capturing this variability may improve the robustness of scientific
+findings. This finding importantly highlights how numerical variability may be regarded as a feature that should be
+taken into considerations by the pipeline developers in the neuroimaging and other scientific domains.
+
+We demonstrated the numerical noise sensitivity of two of the most complex pipelines in neuroimaging,
+HCP preprocessing pipelines, PreFreeSurfer and FreeSurfer. Technically, these pipelines consist of a mix of tools
+assembled from different toolboxes through a variety of scripts written in different languages. In addition to the preprocessing steps,
+we evaluated the numerical stability of a complete fMRI analysis using three of the most popular tools in neuroimaging, including FSL, SPM, and AFNI.
+We, therefore, believe that the results presented in this thesis would apply to a wide range of other pipelines. 
+However, the current methodology is limited to Linux operating systems. 
+Our findings are likely to generalize to OS/X or MS Windows, although future work would be needed to confirm that.
+
+Moreover, the interposition technique is only applicable to intercept system calls in dynamically linked programs. 
+Further investigations are needed if we aim to evaluate the stability of the pipelines with statically linked executables.
+
+
+\subsection{Recommendations for the future research}
+
+Among the processes that contribute to the pipeline instability, some of them substantially
+have a higher effect on results. For instance, iterative computations can accumulate rounding errors in
+some cases and significantly amplify errors. Therefore, evaluating the stability of pipeline components as
+well as the entire pipeline helps to identify processes that propagate and amplify errors within pipelines and
+then substitute them for more stable tools that perform a similar function, ultimately improving the quality
+of the pipeline.
+It is important to propose numerical debugging tools to identify such numerical bugs raised during the
+execution of a complicated pipeline. This is a well-studied problem in the floating-point error characterization
+research field, which has resulted in the development of debugging tools such as VeriTracer~\cite{chatelain2018veritracer},
+FpDebug~\cite{benz2012dynamic}, Verrou~\cite{fevotte2019debugging}.
+These tools automatically replace all the floating-point operations with their MCA counterparts
+or other stochastic arithmetics to evaluate the numerical quality of the computation and pinpoint the parts
+of the source code. They instrument pipelines at compilation time in the compiler-based tools that need to
+access the source code, or running time in the Valgrind-based tools that add computation time overhead.
+Moreover, some of these tools need pre-knowledge of the functions or variables to be traced in the pipeline.
+
+Using a combination of techniques developed in this thesis, in future work,
+we can create a debugging tool at the level of system call processes without
+recompiling the source code to identify the processes with the highest impact on results in the pipeline due
+to the operating system variability. 
+This functionality could leverage the tool
+developed in Chapter~\ref{ch:c1} and the interposition technique to inject MCA perturbations described in Chapter~\ref{ch:c2}.
+Moreover, we can use the principle of minimization by delta-debugging to search through a large number of processes. 
+The delta-debugging algorithm is a general technique that can automatically narrow down the failure caused by changing circumstances
+that are critical to producing the bug, such as program input, program code, environmental configurations,
+etc~\cite{zeller1999yesterday,zeller2002isolating}. Instead of working on the program's code, we can apply the delta-debugging methodology to the
+program history by comparing various versions until the faulty change is found. This enables to identify
+of those processes in the program that significantly have higher effects on results. Finding these processes could
+narrow down further investigations toward stabilizing the pipelines.
+
+Improving the instability needs actions different from evaluation and localization of instability.
+It is not a general approach to stabilize the entire pipeline; we should look at the relevant code section
+to find an appropriate solution. For example, we found that linear and non-linear registration processes introduce errors
+in both FreeSurfer and PreFreeSurfer pipelines. On the other hand, we know that the registration procedure is sensitive to
+the initialization of the optimization method used~\cite{Glatard2018hbm}. 
+A possible method to address such instabilities is using the bootstrapping technique.
+In~\cite{Glatard2018hbm}, the authors explained that bootstrapping is an efficient technique to improve
+the robustness of motion estimation. The bootstrap version of the pipelines computed the median transformation
+results from the 30 samples. In addition to bootstrapping, it is shown that the bagging technique can
+reduce the effect of the medians of the parameters of the 30 transformations. Bagging, also called bootstrap
+aggregating, is a simple and powerful ensemble method. It helps reduce both bias and variance in the results.
+So, we can possibly stabilize pipelines and improve their accuracy using aggregates of results obtained with
+data perturbations. However, it is a compute-intensive technique that should be used only when no other
+solution to the instability is available. 
+Further study needs to be conducted into the processes involved in analysis instability.
+
+The main goal of this thesis was to evaluate instabilities within neuroimaging pipelines. 
+An exciting research topic for future work could be finding that the variability arising from numerical perturbations may contain
+meaningful signals. This suggests that the perturbation model is not only helpful as a method for measuring
+the stability of analyses but that it can be applied to improve their quality. 
+For this purpose, we can also apply other types of perturbations.
+Given that FL only perturbs basic mathematical functions, we expect more numerical variability
+by perturbing operations that rely on the linear algebra libraries BLAS and LAPACK.
+For future study, this can be evaluated using MCA-instrumented
+versions of BLAS and LAPACK along with other libraries available in the Fuzzy project in Verificarlo’s
+GitHub repository at \url{github.com/verificarlo/fuzzy}.
+
