@@ -45,7 +45,7 @@ influential source of irreproducibility~\cite{hill2017numerical}. Such
 differences are particularly noticeable across computing processors 
 such as CPUs (Central Processing Units), GPUs (Graphics Processing 
 Units) and APUs (Accelerated Processing Units), mainly due to conflicts 
-of floating point units (FPU) with the IEEE-754 standard when 
+of floating-point units (FPU) with the IEEE-754 standard when 
 arithmetic precision of the floating-point values are not specified 
 uniformly.
 
@@ -121,7 +121,7 @@ CPUs~\cite{taufer2010improving}. Multi-core architectures enable
 multi-threaded environment for running numerical intensive applications 
 at high speeds. This study showed that the stability of molecular 
 dynamics simulation results is not guaranteed in multi-core processors 
-due to using different order of floating-point operations (e.g. 
+due to using different order of floating-point operations (e.g., 
 division and square root operations) in ways that these operations lead 
 to different rounding and truncation. 
 
@@ -134,24 +134,24 @@ another thread is allowed to modify or delete this element. So, the
 resulting final state depends on the order of process operations, which 
 is not specified by the application. In addition to race condition, 
 some other problems have been listed as the main sources of numerical 
-differences in many paralelized experiments such as out-of-order 
+differences in many parallelized experiments such as out-of-order 
 execution, and message buffering non-blocking communication 
 operations~\cite{revol2013numerical}. 
 
 Message buffering is a type of communication using send/receive 
 functions in parallel programming, which can be blocking and 
 non-blocking. In contrast to blocking, non-blocking communication do 
-not block process if the communication is not finished yet. 
-Non-blocking means that computing and transferring data can happen in 
+not block the process if the communication is not finished yet. 
+Non-blocking means that computing and transferring data can happen at 
 the same time for a single process. This allows communication to 
-overlap, which generally can leads to different computing order and 
+overlap, which generally can lead to different computing orders and 
 irreproducible results for different runs. 
 
 Furthermore, some experiments are reported in~\cite{Gronenschild2012} 
 to determine the effect of parallelization on neuroimaging pipelines, 
 most precisely in different versions of FreeSurfer. Regarding these 
 experiments, results demonstrate that concurrent running would not make 
-statistical significant differences based on the comparison of voxel 
+statistically significant differences based on the comparison of voxel 
 volume of specific brain structures for the same conditions. This is an 
 example where Peng's reproducibility is achieved while numerical 
 reproducibility is not.
@@ -172,9 +172,9 @@ libraries.
 
 The results of \emph{RS-fMRI} analysis revealed significant inter-OS 
 differences in the second experiment. This analysis showed that each 
-pre-processing step can introduce small numerical variations, but their 
+pre-processing step could introduce small numerical variations, but their 
 accumulation creates important differences. These numerical differences 
-are caused by changing implementation of mathematical functions like 
+are caused by changing the implementation of mathematical functions like 
 \emph{sinf()} between operating systems.  
 
 Using FreeSurfer and CIVET packages, cortical thickness extraction 
@@ -189,7 +189,7 @@ static build of a pipeline refers to its compiled version where
 libraries are statically linked. In this test, the authors used the 
 static builds of FreeSurfer CentOS 4 and CentOS 6 to measure their 
 reproducibility. Results show that building static program improves 
-reproducibility across OSes, but small differences still remained. The 
+reproducibility across OSes, but small differences still remain. The 
 main cause of such differences is dynamic libraries that are loaded by 
 the static executable at run-time. 
 
@@ -206,7 +206,7 @@ the static executable at run-time.
 
 In~\cite{Glatard2015}, it has been detected that most of the 
 neuroimaging pipelines are sensitive to the operating 
-systems. The effect-size of the variations is changed based on the 
+systems. The effect size of the variations is changed based on the 
 complexity of the analysis pipeline. For instance, shorter analyses 
 like brain extraction have much less significant disagreement compared 
 to the longer ones like subcortical tissue classification and RSfMRI 
@@ -242,11 +242,11 @@ measures. Thus, it is important for users to be able to reproduce
 analyses in any future update of these analytic software. 
 
 Moreover, the same study~\cite{Gronenschild2012} showed that the effect 
-size of different operating systems or software versions are close to 
+sizes of different operating systems or software versions are close to 
 the ones measured in neuropsychiatric diseases. For example, the impact 
 of Alzheimer disease and semantic dementia on Grey Matter volume 
 changes are reported in~\cite{lehmann2010atrophy}. These results show 
-similar changes between volumes of specific structures in compared to 
+similar changes between volumes of specific structures compared to 
 the discrepancies caused by computation environment variability 
 in~\cite{Gronenschild2012}. In addition, differences in cortical 
 thickness caused by various operating systems, software versions and 
@@ -273,7 +273,7 @@ software package results such as producing different location of
 activation regions. 
 Figure~\ref{inter_sfw} shows the substantial variation 
 between each main activation area found in the original study and the 
-reanalyses. Results indicate that the precise location of the significant 
+reanalyses. Results indicate that the precise location of the significantly 
 activated regions is highly dependent on the choice of software package 
 and inference method.
 
@@ -321,13 +321,13 @@ variations may result in wrong activation maps and increase the
 prevalence of false activations on the subsequent steps of fMRI 
 processing. 
 
-Recently, processing of high-resolution images are made possible 
+Recently, the processing of high-resolution images has been made possible 
 through a new version of pipelines. Therefore, the study 
 in~\cite{Lindsay2018hbm} quantifies the variability of analysis results 
 across different image resolutions. The authors investigated the 
 partial volume effects of various image resolutions on the automated 
 cortical surface extraction through CIVET and FreeSurfer pipelines. 
-This study shows a significant variability on results for the same 
+This study shows significant variability in results for the same 
 analysis using images with different resolutions. For both pipelines, 
 mean absolute error, signed error, and standard deviation are mostly 
 reduced as a function of increasing resolution. Also, comparison of 
@@ -335,7 +335,7 @@ projected distance error maps between histological ground truth
 surfaces and MRI-derived surfaces confirms that the accuracy of 
 analysis is increased in higher resolutions. Further research is needed 
 to minimize partial volume effects along with magnifying the resolution 
-to get a more accurate results. 
+to get more accurate results. 
 
 % \subsection{Conclusion}
 
@@ -367,16 +367,17 @@ the FAIR principles~\cite{wilkinson2016fair} according to which
 scientific sources have to be findable, accessible, interoperable, and 
 re-usable. 
 
-First step in reproducibility is to find and access research products, 
-which is related to Findable and Accessible principles in FAIR. 
+The first step in reproducibility is finding and accessing research products
+related to Findable and Accessible principles in FAIR.
 Code and data must be publicly available in a 
-machine-readable structure. It enables the verification of scientific 
-results by independent investigators. Therefore, reproducibility 
+machine-readable structure. Therefore, reproducibility 
 increases the reliability and transparency of experiments. 
+It enables the verification of scientific 
+results by independent investigators. 
 
 Through reproducibility, analysis pipelines need to be able to 
 integrate with other execution environments. This is termed research 
-portability, and can be achieved using virtual machines and 
+portability and can be achieved using virtual machines and 
 containerization technologies. Portability enables researchers to 
 re-run analyses in a variety of execution conditions. This can be 
 matched with the Interoperability and Re-usability of FAIR principles. 
@@ -385,7 +386,7 @@ In addition, analysis pipelines must be numerically stable across a
 variation of the computing environments to be reproducible. Although 
 many solutions currently exist to address analysis sharing and 
 portability, the effect of numerical instability remains largely 
-unexplained. In this chapter, we will discuss a number of techniques 
+unexplained. In this section, we will discuss a number of techniques 
 and tools used to enhance sharing, portability, and stability of the 
 analysis.
 
@@ -400,7 +401,7 @@ codes with others or contribute to a wider group.
 
 One foundation of code sharing is modern software engineering, which 
 includes practices like version control systems (VCS). Version control 
-ensures that history of the code is available and archived. 
+ensures that the history of the code is available and archived. 
 Git~\cite{git}, as one of the most popular VCS frameworks, provides a 
 distributed platform to manage project files. Git facilitates the 
 collaboration of developers on the same project using GitHub. GitHub is 
@@ -411,8 +412,8 @@ because of commercial reasons, simplifying its usage, reproducibility,
 etc. For this purpose, several sharing tools exist that maintain a set 
 of packages. As an example of more generic sharing tools, PyPI (Python 
 Package Index) is a software repository for the Python programming 
-language. PyPI helps to share python packages, and allows users to 
-search for packages by keywords. Futhermore, there are more specific 
+language. PyPI helps to share python packages and allows users to 
+search for packages by keywords. Furthermore, there are more specific 
 sharing tools for neuroimaging programs including 
 Boutiques~\cite{glatard2017boutiques}, a system to publish and 
 integrate command-line applications automatically using a JSON 
@@ -421,7 +422,7 @@ NITRC-CE~\cite{kennedy2016nitrc} which provides a number of
 pre-installed neuroimaging tools such as AFNI, FSL, and FreeSurfer into 
 a standardized computational environment. 
 
-Furthemore, data sharing is important as it facilitates reproducibility 
+Furthermore, data sharing is important as it facilitates reproducibility 
 of analyses, and it enables the assessment of future works in 
 comparison with previous analyses. However, there are some challenges 
 associated with data sharing including concerns about the privacy of 
@@ -435,28 +436,27 @@ and Git-LFS (Large File Storage)~\cite{git-lfs} were developed to
 address the problem of sharing and versioning large data collections. 
 git-annex uses Git to store and index files without committing large 
 files into the Git repository. Similarly, Git-LFS reduces the impact of 
-file size in repository by replacing large files with lightweight 
-pointer files in the repository, which refer to the actual file 
-location. 
+file size in the repository by replacing large files with lightweight 
+pointer files, which refer to the actual file location. 
 
 Both Git and git-annex are great for collaboration on a single 
 repository, but sharing code and data between multiple projects can be an 
-issue across these tools. Also, they lack advance meta-data search 
+issue across these tools. Also, they lack advanced meta-data search 
 capabilities. For instance, they cannot crawl throughout domain-specific repositories.
  For this purpose, Datalad~\cite{datalad} is an 
 efficient tool particularly for data sharing and versioning across 
 multiple datasets. This tool is built on top of the git-annex and provides 
 unified access to data regardless of its origin. There is a guarantee 
 that the content for the same version would be the same across all 
-clones of dataset, regardless where content was obtained from. 
+clones of a dataset, regardless of where the content was obtained. 
 DataLad supports multiple redundant data providers for each file in a 
-dataset, and will transparently attempt to obtain data from an 
+dataset and will transparently attempt to obtain data from an 
 alternative location if a particular data provider is not available. 
 Furthermore, a provenance record is provided by Datalad with all 
 necessary information about input data to reproduce the analysis 
 results. 
 
-In addition, higher level platforms were designed to help 
+In addition, higher-level platforms were designed to help 
 scientists share neuroimaging data and make them public on web such as 
 openNeuro~\cite{gorgolewski2017openneuro}, LORIS~\cite{das2012loris}, 
 and XNAT~\cite{marcus2007extensible}. 
@@ -472,11 +472,11 @@ data-sharing initiatives in the field of neuroimaging including the
 International Neuroimaging Data-Sharing Initiative 
 (INDI)~\cite{mennes2013making, milham2012open}, the Alzheimer’s Disease 
 Neuroimaging Initiative (ADNI)~\cite{jack2008alzheimer}, and Human 
-Connectome Project (HCP)~\cite{van2012human}. Using data published by 
-these projects, researchers who once struggled to access to the 
-restricted datasets can now explore thousands of published subjects. 
+Connectome Project (HCP)~\cite{van2012human}. Researchers who once struggled
+to access the restricted datasets can now explore thousands of published subjects
+using data published by these projects.
 Public access to this amount of brain imaging data has become 
-invaluable for specialists to test a variety of scientific hypothesis 
+invaluable for specialists to test a variety of scientific hypotheses 
 and evaluate novel image processing algorithms. 
 
 
@@ -497,13 +497,13 @@ environment where analyses took place. The most popular implementations
 of VMs include VMware~\cite{wiki:vmware}, 
 VirtualBox~\cite{watson2008virtualbox}, and KVM~\cite{kivity2007kvm}. 
 VMs may produce large images because they hold a copy of all the 
-operating system files including kernel, system libraries, and system 
+operating system files including the kernel, system libraries, and system 
 configuration files. In addition, VMs bring an extra 
 performance overhead such as I/O, CPU, and memory.
 
 In contrast, containerization tools like 
 Docker~\cite{boettiger2015introduction} and 
-Singularity~\cite{kurtzer2017singularity} reduce dramatically the 
+Singularity~\cite{kurtzer2017singularity} dramatically reduce the 
 performance overhead and image size of VMs by sharing the kernel of the 
 host system across the containers. These tools have emerged to build 
 lightweight and portable images. Container images can be version 
@@ -514,7 +514,7 @@ necessary dependencies are collected inside the containers. For this
 purpose, some workflow management systems are developed to record the 
 computational dependencies: we will describe them in the next section. 
 
-As an example of container-based tool, Nextflow~\cite{di2017nextflow} 
+As an example of a container-based tool, Nextflow~\cite{di2017nextflow} 
 is implemented to ensure workflow reproducibility. Nextflow uses Docker 
 to containerize pipeline dependencies including data, code, and the 
 computing environment. Nextflow can be integrated with public 
@@ -529,24 +529,24 @@ they mostly mask differences instead of fixing them, as explained hereafter.
 \subsection{Numerical Instability}
 
 Containers and VMs are good to mask the effect of hardware, 
-paralellization, and operating system. However, it is very likely that 
-this effect is due to numerical instabilities in the data analysis 
+parallelization, and operating system. However, this effect is likely due to 
+numerical instabilities in the data analysis 
 pipelines. We believe that these effects are the combined results of 1) 
 the creation of numerical errors between conditions and 2) the 
 amplification of these numerical errors throughout the pipelines. 
 
 \subsubsection{Creation of Numerical Errors}
 
-Main causes of numerically irreproducibility are the limitations of 
-floating point operations, in particular, using a finite precision in 
+The main causes of numerically irreproducibility are the limitations of 
+floating-point operations, in particular, using a finite precision in 
 their arithmetic operations like summation~\cite{hill2017numerical, 
 taufer2010improving}. In this section, several solutions are proposed 
 to improve numerical reproducibility related to the floating-point 
-operation, but they would not fix numerical instability. 
+operation, but they are not satisfactory solutions to fix numerical instability. 
 
 Floating-point numbers are composed of a mantissa (significand) as the 
 significant digits of the number, a base and an exponent that specifies 
-the right finite precision, and a sign for both negative and positive 
+a finite precision representation, and a sign for both negative and positive 
 values. Floating-point data type represents an approximation of a real 
 number on computers, depending on the size of the 
 mantissa~\cite{hill2017numerical}. Each computing system provides 
@@ -555,28 +555,22 @@ computations with a finite precision. However, finite precision
 computations create numerical errors mostly due to truncation error and 
 round-off error. 
 
-Truncation error is the error caused by truncating a mathematical 
-procedure. Some computations include infinite number of terms for exact 
-solutions like Taylor series and exponential functions. 
-In numerical 
-solution, we can only use a finite number of terms. Therefore, these 
-functions will be truncated after a finite number of calculations to 
-evaluate an approximation. This difference between a truncated value 
-and actual value is called truncation error~\cite{kiusalaas2013numerical}. 
+Computers can represent floating-point numbers with limited precision; therefore,
+they have to round numerical results to the closest number that they can represent,
+this is leading to rounding  error~\cite{fadnavis1998some}. 
+Truncation error is the difference between actual (analytical) value and
+truncated (approximated) value of computation with an infinite number of process
+such as Taylor series and exponential functions~\cite{kiusalaas2013numerical}.
+When truncating a number to a limited number of decimal places, say x, the first x digits
+of the mantissa are reserved, and simply chopping off the remainder.
+When rounding a number, the computer chooses the closest number that is representable by
+the computer. This is called round-off error and is caused by the approximate representation of numbers.
+Although rounding error is in the order of magnitude of $e>10^{-7}$ for IEEE-754 single-precision
+and $e>10^{-16}$ for IEEE-754 double-precision, their accumulation can be significant. 
 
-Round-off error, also called rounding error, is the error caused by 
-approximate representation of numbers. Computers can represent 
-floating-point numbers with a fixed number of digits (fixed precision). 
-Therefore, they have to round numerical results to the closest number 
-that they can represent, this is leading to rounding 
-error~\cite{fadnavis1998some}. Although rounding error is in the order 
-of $e>10^{-7}$ for single precision and $e>10^{-16}$ 
-for double 
-precision, their accumulation can be significant. 
-
-Rounding errors can lead to different results depending on the order in 
-which operations are performed. In particular, in the presence of 
-rounding errors the addition is not associative. For instance, assuming 
+Notably, due to the non-associativity of floating-point addition, 
+rounding errors can lead to different results depending on the order in 
+which operations are performed. For instance, assuming 
 a computer with 4 decimal digits of precision, the following summation 
 in different orders leads to different results.
 \[
@@ -587,54 +581,44 @@ in different orders leads to different results.
 \]
 
 In the first summation, rounding error would be introduced in the truncation of 104.327 to 104.3.
-This shows rounding errors leading to different results, depending on the precision of floating-point numbers used by the system.
-% In addition, rounding errors would lead to different results depending 
-% on the precision of floating-point numbers used by the system.
+This shows rounding errors leading to different results, depending on the finite precision of floating-point numbers used by the system.
 
-To address these numerical errors, a number of 
-solutions are proposed in~\cite{muller2018reproducible} 
-such as using higher precision, deterministic order of operations, 
+In the following paragraphs, we explain several approaches discussed in~\cite{muller2018reproducible}
+to improve these numerical errors, such as using higher precision, deterministic order of operations,
 arbitrary-precision operations, and fixed-point arithmetic.
 
-\paragraph{Higher precision.} Using high-precision numbers can yield 
-reproducible results with high probability. For instance, calculations 
-using double precision produce more accurate results than single 
-precision. 
-However, it is not a sufficient solution because  
-tiny rounding errors still exist for the higher precision, which can 
-produce significant bits flip (e.g. from 0.999999... to 1). 
+\paragraph{Higher precision.} Using high-precision numbers, for instance,
+calculations using double-precision produce more accurate results than single-precision.
+However, it is not a satisfactory solution for numerical instability
+because tiny rounding errors still exist for higher precision, which can produce significant bits flip.
 
-\paragraph{Deterministic order of operations.} It is possible to make 
-computations deterministic in terms of the order in which floating 
-point operations are performed. This can result in reproducible results 
-across runs, but this solution may add memory overhead, and affect 
-the performance of executions. 
+\paragraph{Deterministic order of operations.} It is possible to make computations deterministic
+in terms of the order in which floating-point operations are performed.
+This can lead to more numerically stable results across runs,
+but this solution may add memory overhead and affect the performance of executions.
 
-\paragraph{Fixed-point arithmetic.} Unlike the floating point numbers, 
-fixed-point numbers reserve a fixed number of digits after the decimal 
-point, regardless of how large or small the number is.
-It is common to use fixed-point arithmetic to represent large 
-fractional numbers. Although it helps to avoid of rounding errors, it 
-limits range of values. Fixed-point operations are often slower than 
-floating-point operations which are implemented in hardware like CPUs 
-and GPUs.
+\paragraph{Fixed-point arithmetic.} %Unlike the floating-point numbers, 
+Fixed-point numbers reserve a fixed number of digits after the decimal point,
+assuming that numbers are integer multiple of some common denominator and come from similar orders of magnitude. 
+It is common to use fixed-point arithmetic to represent large fractional numbers. 
+Fixed-point operations are often faster than floating-point ones since
+they don't depend on the availability of an FPU.
+Although it helps reduce rounding errors, it limits the range of values, and overflows can occur
+if the result of an operation is larger or smaller than the numbers in that range.
 
-\paragraph{Arbitrary-precision operations.} We can use high-precision 
-or even arbitrary-precision operations to push the limits of 
-fixed-point arithmetic. This means that the precision of numbers is 
-limited only by the available memory of the host system. 
-This not only requires many hardware instructions for each arithmetic 
-operation, but also variable-width storage is much more difficult to 
-handle than the fixed-width. 
+\paragraph{Arbitrary-precision operations.} We can use high-precision or even arbitrary-precision
+operations to push the precision limitation of floating-point arithmetic. 
+This means that the precision of numbers is limited only by the available memory of the host system. 
+This requires many hardware instructions for each arithmetic operation and the difficulty of handling the variable-width storage.
 
 
 \subsubsection{Amplification of Numerical Errors}
 
 There is evidence showing that analyses are not stable to small numerical 
-errors because of propagation and amplification of these errors. 
-For instance, propagation of rounding errors from initial value in 
+errors because of the propagation and amplification of these errors. 
+For instance, propagation of rounding errors from the initial value in 
 numerical computations were studied by performing different experiments 
-in~\cite{fadnavis1998some}. In this paper several computational 
+in~\cite{fadnavis1998some}. In this paper, several computational 
 experiments are presented to demonstrate the rapid growth of rounding 
 errors in iterative computations like iterative addition. The 
 accumulation of rounding error from summation operation indicates that 
@@ -658,7 +642,7 @@ compute-intensive technique that should be used only when no other
 solution to the instability is available. 
 
 In addition to bootstrapping, it is shown that bagging technique can 
-reduces the effect of perturbations~\cite{breiman1996bagging, 
+reduce the effect of perturbations~\cite{breiman1996bagging, 
 breiman1996heuristics}. Bagging, also called bootstrap aggregating, is 
 a simple and powerful ensemble method. It helps reduce both bias and 
 variance in the results. So, we can possibly stabilize pipelines and improve 
@@ -676,17 +660,17 @@ form. This information can be achieved by provenance capturing
 tools. 
 
 Provenance is defined as the collected information about objects and 
-processes involved in workflow result. This information can be 
-used to verify reliability and reproducibility of 
+processes involved in workflow results. This information can be 
+used to verify the reliability and reproducibility of 
 executions~\cite{missier2013w3c}. Provenance information can contain the 
 metadata that displays what data processing is 
 undergone~\cite{nichols2017best}. For example, which parameters are 
 used for the analysis, what form of image is used, how the image was 
 registered/aligned to a standard space, how noise was eliminated, how 
-an specific feature has recognized. Capturing such information is 
+a specific feature has been recognized. Capturing such information is 
 out of the scope of my research. Instead, we are looking for 
 detail of the computing environments provided by the provenance 
-capturing tools. In this chapter, we will discuss different aspects 
+capturing tools. In this section, we will discuss different aspects 
 of provenance capturing such as system-level provenance capturing and 
 workflow specifications. Finally, we give examples of some specific 
 workflow engines that provide these features. 
@@ -715,8 +699,8 @@ steps, and computing environments. Using this provenance receipt,
 readers/reviewers can then extract the packages and reproduce analysis. 
 In addition, ReproZip generates a workflow specification for 
 experiments that models the processes involved in the workflow. Using 
-this, users can easily explore reproducibility of experiments, or test 
-another configurations. 
+this, users can easily explore the reproducibility of experiments or test 
+other configurations. 
 
 The ReproZip tool also suffers from limitations as it cannot deal with 
 packing the experiments in different operating systems except a 
@@ -735,14 +719,14 @@ processes concurrently. So, there is no guarantee to reproduce analysis
 in this condition as well.
 
 Similar to ReproZip, CARE is a packaging tool 
-which enables user to reproduce Linux-based experiments by making a 
+that enables users to reproduce Linux-based experiments by making a 
 compressed archive of all the software dependencies. CARE is a portable 
-tool which makes it easy to run because it doesn't need any 
+tool that makes it easy to run because it doesn't need any 
 installation process, neither administrative 
 privileges~\cite{janin2014care}. With the same purpose, CDE tool 
 relies on system call interception to capture and make an independent 
-package of computing environments~\cite{guo2012cde}. In contrast to CDE 
-that is able to capture dependencies of simple analyses, CARE is more 
+package of computing environments~\cite{guo2012cde}. In contrast to CDE, 
+which is able to capture dependencies of simple analyses, CARE is more 
 practical for complex analyses because of tracking the history of 
 processes. 
 
@@ -750,10 +734,10 @@ processes.
 \subsection{Provenance Formats}
 
 All aforementioned provenance capturing tools have a common feature on 
-tracking, bundling, and sharing of all the necessary dependencies of 
-project automatically and systematically. Besides, representation of 
+tracking, bundling, and sharing all the necessary dependencies of 
+a project automatically and systematically. Besides, representation of 
 this data is necessary to have an understandable structure for everyone 
-with different background. Therefore, a few works are conducted 
+with different backgrounds. Therefore, a few works have been conducted 
 recently to introduce an integrated and standard provenance 
 specification. 
 
@@ -768,23 +752,22 @@ relational model of such provenance elements as an XML format. Also,
 the PROV model is not tailored to any specific application 
 domains~\cite{cheney2012principles, missier2013w3c}.
 
-Using PROV model, we can check reproducibility of the scientific 
+Using PROV model, we can check the reproducibility of the scientific 
 workflows by comparing results of the same workflow on different 
 conditions. Also, this specification can provide information about the 
 processes that lead to execution failures~\cite{missier2013w3c}. 
 Similarly, a number of projects specific to the neuroimaging field were 
-proposed to support reproducibility of research studies. Among 
-them, we will discuss two popular neuroimaging provenance specification 
+proposed to support the reproducibility of research studies. Among 
+them, we will discuss two popular neuroimaging provenance specifications 
 in this section: NIDM-Results and BIDS-Derivatives. 
 
 NIDM-Results, as a part of the Neuroimaging 
 Data Model (NIDM) project~\cite{nidm-results}, is a domain-specific 
 extension of PROV based on semantic web technologies. NIDM-Results 
-provides a machine-readable representation of neuroimaging results. The 
-goal of this specification is encoding the provenance results of some 
-specific neuroimaging software such as SPM and FSL. It is also
-suitable for different neuroimaging modalities including functional 
-MRI, structural MRI, and diffusion MRI.
+provides a machine-readable representation of neuroimaging results.
+This specification aims to encode the provenance results of some specific
+neuroimaging software such as SPM and FSL. It is also suitable for different
+neuroimaging modalities including functional MRI, structural MRI, and diffusion MRI.
 
 NIDM-Results uses the same elements introduced in PROV (entities, 
 activities, and agents) to provide an interpretable data provenance 
@@ -797,10 +780,10 @@ image (as an entity) using the segmentation (as an activity).
 BIDS-Derivatives provides a standard data provenance compatible with 
 BIDS~\cite{gorgolewski2016brain} raw data format. BIDS-Derivatives 
 simplified both provenance capturing and representing. For the ease of 
-many scientists usage with a limited technical knowledge, the 
+many scientists usage with limited technical knowledge, the 
 specification is created on a JSON file based on a simple file format 
 and folder structure. In this way, researchers can easily share derived 
-data, statistical models and computational results automatically. 
+data, statistical models, and computational results automatically. 
 However, in addition to the MRI modality, BIDS needs to support other 
 neuroimaging data types.
 
@@ -816,13 +799,13 @@ procedure and document them in a machine-readable form, which
 significantly enhance reproducibility. Some of the existing workflow 
 engines in neuroimaging are explained in this section. 
 
-Nipype~\cite{gorgolewski2011nipype} is a Python package which 
+Nipype~\cite{gorgolewski2011nipype} is a Python package that 
 introduces a framework to 1) make uniform access to neuroimaging 
 analysis software and usage information, which allows mixing components 
-from other packages developed in different programming language through 
+from other packages developed in different programming languages through 
 interfaces provided by Nipype; 2) simplify the design of workflows and 
 facilitate the interaction between workflow modules; 3) reduce the 
-training time of how use the packages. Nipype represent the provenance 
+training time of how use the packages. Nipype represents the provenance 
 information using the W3C-Prov specification. Furthermore, 
 VisTrails~\cite{callahan2006vistrails} and 
 Taverna~\cite{oinn2004taverna} perform similar methodology but not 
@@ -836,12 +819,11 @@ provenance~\cite{mackenzie2008neuroimaging}. Therefore, the
 relationship between processes can easily be captured in an XML file 
 format and re-executed later similarly. 
 Also, LONI pipeline is a java-based 
-program which facilitates the process of provenance capturing using a 
+program that facilitates the process of provenance capturing using a 
 graphical user interface. The XML extension provided by LONI can 
-clearly be interpreted across different environments. Additionally, 
-LONI supports the parallel execution, and also provides a simple 
-mechanism for researcher particularly in neuroimaging field to 
-disseminate their experiments. 
+clearly be interpreted across different environments. Additionally,
+LONI supports the parallel execution and provides a simple mechanism for researchers,
+particularly in the neuroimaging field, to disseminate their experiments.
 
 ReproNim~\cite{kennedy2019everything} is an 
 integration of tools to ensure reproducibility of the neuroimaging 

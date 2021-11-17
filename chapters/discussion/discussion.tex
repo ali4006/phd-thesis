@@ -4,13 +4,14 @@
 The main aim of this thesis was to study the numerical stability of neuroimaging pipelines focusing on the effect
 of operating system variability. For this purpose, we leveraged system call interception techniques, including
 the ReproZip tool and perturbation models such as Monte-Carlo arithmetic (MCA)~\cite{Parker1997-qq} as an extension of
-standard floating-point arithmetic that exploits randomness in basic floating-point operations. 
+standard floating-point arithmetic that exploits randomness in basic floating-point operations.
 With this in mind, this chapter first considers the discussion of the findings and contributions.
 We then discuss the implication of the results and limitations of the current methodology in this work.
 This chapter concludes with recommendations for future studies.
 
 
-\subsection{Thesis findings}
+% \subsection{Thesis findings}
+\subsection{The impact of numerical perturbations}
 
 Throughout this thesis, we demonstrated the role of numerical errors in different computational environments in neuroimaging pipelines.
 In Chapter~\ref{ch:c1}, we introduced Spot, a tool to detect the source of numerical differences in pipelines
@@ -57,7 +58,8 @@ different thresholds used in different tools.
 % This raises further investigations on thresholding techniques to reduce the associated instabilities.
 
 
-\subsection{The implication of results}
+% \subsection{The implication of results}
+\subsection{The importance of numerical instability}
 
 This study was a contribution to uncertainty quantification in medical imaging.
 The numerical error is often neglected or only partially studied due to the associated engineering challenges among

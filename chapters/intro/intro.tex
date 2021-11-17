@@ -1,13 +1,13 @@
 \chapter{Introduction}
 \label{ch:intro}
 
-Reproducibility is regarded as a fundamental concept in scientific 
+Reproducibility is regarded as a fundamental concept in the scientific 
 community. Research findings are expected to be reproducible so that 
 their authenticity and reliability can be evaluated. The goal of my 
-research is to investigate reproducibility of analysis across different 
+research is to investigate the reproducibility of analysis across different 
 computing environments. In particular, we are mostly interested in 
 neuroimaging as a case study. We aim to present techniques to evaluate 
-numerical instability of analysis across different computing environments 
+the numerical instability of analysis across different computing environments 
 instead of masking the reproducibility problem by fixing parameters. 
 
 In this chapter, we summarize the main definitions and 
@@ -64,7 +64,7 @@ reproducibility and replicability as methods
 reproducibility and results reproducibility respectively, and adopted a 
 new terminology called inferential reproducibility.
 From Goodman's terminology, exactly the same data and procedure are 
-reanalysed in methods reproducibility. Result reproducibility is 
+reanalyzed in methods reproducibility. Result reproducibility is 
 equivalent to Peng's replicability terminology which is defined as 
 getting almost the same results compared to the original study from an 
 independent replication of a study. Also, inferential reproducibility 
@@ -121,22 +121,19 @@ errors created during the pipeline execution may hamper numerical
 reproducibility, but be negligible in the final results.
 
 Reproducibility, as the cornerstone of scientific research, guarantees 
-the reliability of results. A reproducible study provides a context in 
-which one is able to get results that are consistent with the original 
-work. In addition, it not only saves a great deal of time, but also 
+the reliability of results. A reproducible study provides a context in which one can get results consistent with the original work.
+In addition, it not only saves a great deal of time, but also 
 enables others to use existing works as a part of their 
 experiments~\cite{plesser2018reproducibility}. 
 In our work, we follow Peng's definition of reproducibility 
 unless we directly refer to numerical reproducibility. 
-We seek to identify the reasons why such reproducibility may not be 
-ensured, focusing in particular on computational aspects.
-
+We seek to identify why such reproducibility may not be ensured, focusing particularly on computational aspects.
 
 \section{Reproducibility Crisis}
 
 Recently, scientists began to realize that the results of many 
 scientific experiments were neither replicable nor reproducible. This 
-realization is termed the reproducibility crisis. In this section 
+realization is termed the reproducibility crisis. In this section, 
 we provide an overview of evidence for the
 reproducibility crisis, which has raised important concerns in the 
 scientific community.
@@ -166,7 +163,7 @@ reproduce their own results. Moreover, this study listed some of
 the main reasons that lead to irreproducibility of analysis 
 such as poor statistics, the pressure to publish 
 and then selective analysis. 
-With this, over 50\% of the scientists polled believed that there is a 
+With this, over 50\% of the scientists polled believed that there was a 
 significant crisis.
 
 Furthermore, some studies underline the reproducibility issues of 
@@ -195,9 +192,9 @@ stodden2016enhancing}.
 From the computational point of view, reasons such as the lack of 
 details of the computational environments can contribute to 
 irreproducibility of research results. Analyses need sufficient 
-information on code, software, hardware and implementation details to 
+information on code, software, hardware, and implementation details to 
 be computationally reproducible. In addition, capturing such 
-information is complicated particularly in domains where results rely 
+information is complicated, particularly in domains where results rely 
 on a sequence of complex analyses such as neuroimaging pipelines. 
 To overcome this complexity, a mechanism called provenance capturing is
 designed to encompass all dependency information of the computational 
@@ -223,9 +220,9 @@ brain image data. The most common techniques are structural magnetic
 resonance imaging (sMRI), functional magnetic resonance imaging (fMRI) 
 and diffusion magnetic resonance imaging (dMRI).
 
-Structural neuroimaging deals with the anatomical structure of 
-brain and helps in the diagnosis of brain injury and certain diseases 
-such as tumor and stroke. The main software packages used for sMRI are 
+Structural neuroimaging deals with the anatomical structure of the brain and helps
+diagnose brain injury and certain diseases such as tumor and stroke.
+The main software packages used for sMRI are 
 CIVET~\cite{ad2006civet}, FreeSurfer~\cite{fischl2012freesurfer}, and 
 FSL (FMRIB Software Library)~\cite{jenkinson2012fsl}. 
 As opposed to structural imaging, functional imaging is used to measure 
@@ -241,21 +238,21 @@ diagnose metabolic diseases such as Alzheimer's disease. Also, the main
 software packages that implement fMRI processing are SPM (Statistical 
 Parametric Mapping)~\cite{spm}, FSL, and AFNI (Analysis of Functional 
 NeuroImages)~\cite{cox1996afni}. Diffusion imaging is another kind of 
-MRI analysis which measures the anatomical connectivity between 
+MRI analysis that measures the anatomical connectivity between 
 regions, and the main toolboxes are DIPY (Diffusion Imaging in 
 Python)~\cite{garyfallidis2014dipy}, MRtrix~\cite{tournier2012mrtrix}, 
 and FSL.
 
 Depending on the analysis type, several steps can be involved in a 
 neuroimaging study. Generally, the analysis procedure can be divided into 
-the pre-processing and statistical steps. Pre-processing steps are taken 
+pre-processing and statistical steps. Pre-processing steps are taken 
 to prepare data for the statistical analysis and are common between all 
 analysis modalities, including brain extraction to separate the brain 
 tissues from the other parts, or brain alignment which aligns a brain 
 extracted image with a reference image such as the one produced by 
 MNI (Montreal Neuroimaging Institute)~\cite{evans1992anatomical}. 
-After pre-processing steps, depending on 
-modality of analyses (e.g. sMRI, fMRI, and dMRI), statistical analyses 
+After pre-processing steps, depending on the
+modality of analyses (e.g., sMRI, fMRI, and dMRI), statistical analyses 
 are applied to make inferences.
 
 The various pre-processing and analysis steps involved in a 
@@ -266,8 +263,8 @@ the processing of complicated analyses.
 
 \section{Thesis Outline}
 
-The goal of this thesis is to study the numerical stability of neuroimaging pipelines focusing on the effect
-of operating system variability. For this purpose, we leverage system call interception techniques including
+This thesis aims to study the numerical stability of neuroimaging pipelines focusing on the effect
+of operating system variability. For this purpose, we leverage system call interception techniques including the
 ReproZip tool, and perturbation models such as Monte-Carlo Arithmetic (MCA)~\cite{Parker1997-qq} as an extension of
 standard floating-point arithmetic that exploits randomness in basic floating-point operations. The major
 contributions of my thesis are listed below as the separate chapters that we published or aim to publish as an article.
