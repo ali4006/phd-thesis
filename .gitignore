@@ -1,0 +1,14 @@
+*.aux
+cuthesis.pdf
+*.bbl
+*.blg
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.upa
+*.upb
+cuthesis.fdb_latexmk
+_minted-cuthesis/

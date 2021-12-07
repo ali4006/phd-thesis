@@ -11,7 +11,7 @@ This chapter concludes with recommendations for future studies.
 
 
 % \subsection{Thesis findings}
-\subsection{The impact of numerical perturbations}
+\section{The impact of numerical perturbations}
 
 Throughout this thesis, we demonstrated the role of numerical errors in different computational environments in neuroimaging pipelines.
 In Chapter~\ref{ch:c1}, we introduced Spot, a tool to detect the source of numerical differences in pipelines
@@ -36,7 +36,7 @@ We obtained an accurate simulation of OS variability using the FL library in whi
 % This suggests that numerical perturbations introduced by OS updates might be in the range of machine error (virtual precision of 53 bits).
 We found that the pipeline could be implemented exclusively with lower precision of floating-point representations (single-precision)
 without loss of results precision. This would substantially decrease the pipeline memory footprint and computational time.
-However, the finding showed a very low number of significant bits, 5 out of 15 available bits.
+However, the finding showed a very low number of significant digits, 5 out of 15 available digits.
 This motivates further investigation of the numerical stability of the main components of the tested pipelines, such as linear and non-linear registrations.
 Also, it is notable that OS- and FL-induced variability were on a similar order of magnitude as subject-level effects,
 showing that we applied a reasonable amount of perturbations.
@@ -59,7 +59,7 @@ different thresholds used in different tools.
 
 
 % \subsection{The implication of results}
-\subsection{The importance of numerical instability}
+\section{The importance of numerical instability}
 
 This study was a contribution to uncertainty quantification in medical imaging.
 The numerical error is often neglected or only partially studied due to the associated engineering challenges among
@@ -96,7 +96,7 @@ Moreover, the interposition technique is only applicable to intercept system cal
 Further investigations are needed if we aim to evaluate the stability of the pipelines with statically linked executables.
 
 
-\subsection{Recommendations for the future research}
+\section{Recommendations for the future research}
 
 Among the processes that contribute to the pipeline instability, some of them substantially
 have a higher effect on results. For instance, iterative computations can accumulate rounding errors in
