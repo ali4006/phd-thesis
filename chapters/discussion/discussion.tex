@@ -22,8 +22,8 @@ Among them, we observed registration processes as the highly contributed source 
 We found that differences can propagate during the pipeline execution and substantially impact
 the results of the entire pipeline (e.g., segmentations created by FreeSurfer).
 We also captured different results between subjects, showed the sensitivity of the analyses to dataset selection.
-Notably, the irreproducible processes identified by Spot were all associated with dynamically linked executables,
-showing that library updates do not impact statically linked executables.
+Notably, the irreproducible processes identified by Spot were all associated with dynamically linked executables.
+% showing that library updates do not impact statically linked executables.
 
 
 The numerical differences were caused by truncation and round-off errors
@@ -33,7 +33,8 @@ dynamically linked executables of the pipeline. Thereby, the observed instabilit
 depends on which operating systems are used. This limits the evaluation of the underlying stability of a particular tool.
 
 Thereafter, in Chapter~\ref{ch:c2}, we presented a framework to model the numerical uncertainty induced by OS updates in a control condition using Monte-Carlo arithmetic. 
-We obtained an accurate simulation of OS variability using the FL library in which perturbing mathematical GNU/Linux library (libmath).
+We obtained an accurate simulation of OS variability using the fuzzy libmath library,
+a version of the GNU mathematical library (libmath) instrumented with Monte-Carlo arithmetic.
 % This suggests that numerical perturbations introduced by OS updates might be in the range of machine error (virtual precision of 53 bits).
 We found that the pipeline could be implemented exclusively with lower precision of floating-point representations (single-precision)
 without loss of results precision. This would substantially decrease the pipeline memory footprint and computational time.
@@ -52,7 +53,8 @@ more applications like tool variability using the proposed MCA-based method.
 Finally, in Chapter~\ref{ch:c3}, we investigated the type of variability introduced in variations between software packages.
 We compared numerical variability with tool variability across three of the most popular software packages in neuroimaging.
 % This work presents a comparison of numerical and software variability for group-level functional MRI analysis
-We found significant numerical variability that was comparable to tool variability in some brain regions.
+% We found significant numerical variability that was comparable to tool variability in some brain regions.
+In fMRI group analyses, numerical variability was found to be an order of magnitude smaller than tool variability.
 We also found that numerical instability in individual analyses was attenuated in group analyses.
 It is notable that we obtained more uncertainty on thresholded results than unthresholded maps, probably due to
 different thresholds used in different tools.
