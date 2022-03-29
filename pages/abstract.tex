@@ -1,19 +1,21 @@
 \begin{abstract}
 
-Variations of computational infrastructures, including operating systems,
+Variations in computational infrastructures, including operating systems,
 software versions, and hardware architectures, introduce variability in neuroimaging analyses
-that could affect the reproducibility of scientific conclusions.  This is due to the creation,
-propagation, and amplification of numerical instabilities in analysis pipelines. In this regard,
-it is critical to identify numerical instabilities to make experiments computationally reproducible.
+that could affect the reproducibility of scientific conclusions.  These variations are due to the creation,
+propagation, and amplification of numerical instabilities in analysis pipelines.
+It is critical to identify numerical instabilities to make experiments computationally reproducible.
 In this thesis, we characterize the numerical stability of commonly-used complex pipelines in the context
-of neuroimaging analysis across the operating systems and provide accessible tools for developers and
+of neuroimaging analysis across operating systems and provide accessible tools for developers and
 researchers to evaluate their pipelines and findings. First, we present the Spot tool that identifies
-the processes from which differences originate and the path along which they propagate in the pipelines.
+the processes from which differences originate and the path along which they propagate in a pipeline.
 In the next step, to study the numerical instabilities more comprehensively, we introduce controlled
-numerical perturbations to the floating-point computations using the Monte-Carlo Arithmetic method.
-We propose an interposition technique to model the effect of operating system updates on analysis pipelines
+numerical perturbations to the floating-point computations using the Monte-Carlo arithmetic method.
+For this purpose, we propose an interposition technique to model the effect of operating system updates on analysis pipelines
 using the Monte-Carlo arithmetic. Finally, leveraging the interposition technique, we compare numerical
-variability with tool variability in an fMRI analysis. All the methods implemented in this thesis can be
+variability with tool variability in an fMRI analysis. 
+We show that the results of analyses are sensitive to computational environment changes originating from numerical errors.
+All the methods implemented in this thesis are publicly available and can be
 used to facilitate further investigations toward stabilizing pipelines.
 
 \end{abstract}

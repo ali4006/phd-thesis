@@ -3,32 +3,31 @@
 
 Reproducibility is regarded as a fundamental concept in the scientific 
 community. Research findings are expected to be reproducible so that 
-their authenticity and reliability can be evaluated. The goal of my 
-research is to investigate the reproducibility of computational analyses across different 
+their authenticity and reliability can be ensured. The goal of our
+research is to investigate the reproducibility of computational analyses in general across different 
 computing environments. In particular, we are mostly interested in 
-neuroimaging as a case study. We aim to present techniques to evaluate 
+neuroimaging as a case study. We present techniques to evaluate 
 the numerical instability of analysis across different computing environments 
 instead of masking the reproducibility problem by fixing parameters.
 
 In this chapter, we summarize the main definitions and 
 principles relevant to reproducibility. We describe the context of the 
 current ``reproducibility crisis" acknowledged in several scientific 
-disciplines. Multiple studies have shown that research findings could 
+disciplines. Multiple studies have shown that some research findings could 
 not be reproduced by independent researchers, or even by the original 
 researchers themselves. We discuss the main causes for this lack of 
 reproducibility, focusing on the computational aspects. 
-Additionally, we describe different kind of analysis of 
-neuroimaging data and their implemented software which are considered 
-through this thesis. 
-
+Additionally, we describe different kind of analyses of 
+neuroimaging data and their implemented software which are used
+throughout this thesis. 
 
 \section{Reproducibility Definitions}
 
 There are different definitions for the terms reproducibility, 
-repeatability, and replicability, which leads to confusion since the 
-same words are used for different concepts. Here we present different 
+repeatability, and replicability, which leads to confusion because the 
+same words are used for different concepts. We present different 
 terminologies found in the literature and summarized 
-in~\cite{plesser2018reproducibility} (see 
+by Plesser~\cite{plesser2018reproducibility} (see 
 Table~\ref{table:definitions}).
  
 According to Peng's definition~\cite{peng2011reproducible}, 
@@ -37,7 +36,7 @@ results as the original findings when the experiment is reanalyzed
 given exactly the same analytic methods and data. Reproducibility 
 ensures that independent scientists can reproduce the same results 
 using the same data and procedure as published in the original 
-publication. On the contrary, replicability is defined as the ability 
+publication. Replicability is defined as the ability 
 to obtain similar results as published in the original study when 
 the experiment is reimplemented using independent data and analytic 
 methods. Replicability confirms scientific claims and ensures that 
@@ -51,13 +50,13 @@ The same definitions of reproducibility and replicability
 are also used by Schwab et al.~\cite{schwab2000making}.
 
 Donoho et al.~\cite{donoho2009reproducible} defined reproducible 
-computational research as a process where ``all details of 
+computational research as a process by which ``all details of 
 computations such as code and data are made conveniently available to 
 others". The authors associate reproducible research with open science,
 including open code and data. They observe that 
 reproducibility can be achieved by publishing the experimental 
 resources over the Internet, which facilitates versioning, testing, 
-discovery and access to the research materials. 
+discovery, and access to the research materials. 
 
 In addition, Goodman et al.~\cite{goodman2016does} renamed Peng's 
 reproducibility and replicability as methods 
@@ -65,72 +64,81 @@ reproducibility and results reproducibility respectively, and adopted a
 new terminology called inferential reproducibility.
 From Goodman's terminology, exactly the same data and procedure are 
 reanalyzed in methods reproducibility. Result reproducibility is 
-equivalent to Peng's replicability terminology which is defined as 
+equivalent to Peng's replicability terminology, which is defined as 
 getting almost the same results compared to the original study from an 
-independent replication of a study. Also, inferential reproducibility 
+independent replication of a study. Inferential reproducibility 
 is defined as getting the same conclusions from either a reanalysis of 
 the original study or an independent replication of a study with 
-different data and analysis procedures.
+different data and procedures.
  
 Furthermore, the Association for Computing Machinery 
 (ACM)~\cite{acm2016terminology} proposes three different categories of 
 repeatability, replicability, and reproducibility. Repeatability is 
-defined as repeating computation by the same experimental setup 
+defined as repeating computation on the same experimental setup 
 including operator team, operating conditions, location, and measuring 
 system. 
-Similar to replicability, repeatability uses identical experimental 
-conditions except performer team.
-This means that an independent group can achieve the 
+Similar to repeatability, replicability uses identical experimental 
+conditions except performer team,
+which means that an independent group can achieve the 
 same results through the same experimental parameters. 
-Additionally, reproducibility is measured by performing 
+Reproducibility is also defined as performing computation on 
 different experimental setups via different teams 
-independently. It should be noted that reproducibility and 
+independently. Reproducibility and 
 replicability are used inversely compared to Peng's definitions. 
 
-\setlength{\tabcolsep}{1pt}
+\setlength{\tabcolsep}{20pt}
 \begin{table}[H]
-\hspace*{-1cm}
+\hspace*{1cm}
 \caption{Overview of definitions.}
 \label{table:definitions}
 \centering
 \begin{threeparttable}
-\begin{tabular}{@{}llllll@{}}
+\begin{tabular}{@{}llll@{}}
 \toprule
-Schwab et al.$_{(2000)}$ & Donoho et al.$_{(2009)}$ & Peng$_{(2011)}$ & 
-ACM$_{(2016)}$ & Goodman et al.$_{(2016)}$ \\ \midrule
-\makecell{Reproducibility \\ Replicability} &   \makecell{Open \\ code 
-and data} &   \makecell{Reproducibility \\ spectrum}  &   
+Schwab et al.$_{(2000)}$ & Donoho et al.$_{(2009)}$ & Peng$_{(2011)}$  \\ \midrule
+\makecell{Reproducibility \\ Replicability} &
+\makecell{Open code and data} &
+\makecell{Reproducibility \\ spectrum}   \\ \bottomrule
+\end{tabular}
+\end{threeparttable}
+
+\begin{threeparttable}
+\begin{tabular}{@{}lll@{}}
+Revol et al.$_{(2013)}$ & ACM$_{(2016)}$ & Goodman et al.$_{(2016)}$ \\ \midrule
+\makecell{Numerical \\ reproducibility} &
 \makecell{Repeatability \\ Replicability \\ Reproducibility} & 
-\makecell{Method reproducibility \\ Results reproducibility \\ Inferential reproducibility}    \\ \bottomrule
+\makecell{Method reproducibility \\ Results reproducibility \\ Inferential reproducibility} \\ \bottomrule
 \end{tabular}
 \end{threeparttable}
 \end{table}
 
+
+
 In addition, numerical reproducibility is defined as the ability to 
 regenerate bit for bit identical results from multiple 
-runs~\cite{hill2017numerical}. Two files will be considered numerically 
-reproducible if they have identical binary contents. Binary 
-comparison is calculated by comparing checksums. It must be pointed out 
-that a computation might be reproducible based on Peng's definition, 
-but not be numerically reproducible. For instance, small numerical 
+runs~\cite{revol2014numerical}. Two files will be considered numerically 
+identical if they have identical binary contents. Binary 
+comparison is calculated by comparing checksums. 
+A computation might be reproducible based on Peng's definition, 
+but not be numerically reproducible. For example, small numerical 
 errors created during the pipeline execution may hamper numerical 
 reproducibility, but be negligible in the final results.
 
 Reproducibility, as the cornerstone of scientific research, guarantees 
-the reliability of results. A reproducible study provides a context in which one can get results consistent with the original work.
-In addition, it not only saves a great deal of time, but also 
-enables others to use existing works as a part of their 
-experiments~\cite{plesser2018reproducibility}. 
+the reliability, a level of accuracy accepted by the user, of results.
+A reproducible study provides a context in which one can get results consistent with the original work.
+In addition, it allows researchers to perform similar analyses more quickly by sharing resources rather than spend months figuring out current solutions.
+This enables others to use and modify existing works as a part of their experiments~\cite{plesser2018reproducibility}. 
 In our work, we follow Peng's definition of reproducibility 
 unless we directly refer to numerical reproducibility. 
-We seek to identify why such reproducibility may not be ensured, focusing particularly on computational aspects.
+We seek to identify why reproducibility may not be ensured, focusing particularly on computational aspects.
 
 \section{Reproducibility Crisis}
 
 Recently, scientists began to realize that the results of many 
 scientific experiments were neither replicable nor reproducible. This 
-realization is termed the reproducibility crisis. In this section, 
-we provide an overview of evidence for the
+realization led to the so-called the reproducibility crisis. 
+We provide an overview of evidence for the
 reproducibility crisis, which has raised important concerns in the 
 scientific community.
 
@@ -150,64 +158,79 @@ and the flexibility of analytic models, definitions, and outcomes. For
 example, the smaller the studies conducted in a scientific field, the 
 less likely the research findings are to be true. 
 
-To highlight the importance of scientific reproducibility, the survey 
-in~\cite{baker20161} collected data from 1500 scientists among 
+To highlight the importance of scientific reproducibility, a survey ~\cite{baker20161}
+collected data from 1,500 scientists among 
 different disciplines mostly from  biology, medicine, and engineering. 
-This report found that 70\% of the scientists polled could not 
+This survey found that 70\% of the scientists could not 
 replicate another scientist's findings, and even 50\% failed to 
-reproduce their own results. Moreover, this study listed some of 
+reproduce their own results. This survey listed some of 
 the main reasons that lead to irreproducibility of analysis 
 such as poor statistics, the pressure to publish 
-and then selective analysis. 
-With this, over 50\% of the scientists polled believed that there was a 
+and selective analysis. 
+With this, over 50\% of the scientists believed that there was a 
 significant crisis.
 
-Furthermore, some studies underline the reproducibility issues of 
+Furthermore, some studies underlined the reproducibility issues of 
 current analysis methods in neuroimaging~\cite{jovicich2009mri, 
 muller2017altered, eklund2016cluster}. For example, to evaluate 
-reproducibility of a group of functional MRI (fMRI) analyses, the study 
-in~\cite{eklund2016cluster} collected resting-state fMRI data from 499 
-healthy controls. Using this dataset, they found that the most common 
+the reproducibility of a group of functional MRI (fMRI) analyses, a study 
+~\cite{eklund2016cluster} collected resting-state fMRI data from 499 
+healthy controls. Using this dataset, it reports that the most common 
 software packages for fMRI analysis (SPM, FSL, AFNI) can result in a 
 high degree of false positives, up to 70\% compared with the expected 
 5\%. These results question the validity of some 40,000 fMRI studies 
 and may have a large impact on the interpretation of neuroimaging 
-results. All these evidences show a significant crisis in 
+results. 
+
+The impact of Alzheimer disease and semantic dementia on Grey Matter volume changes in~\cite{lehmann2010atrophy}
+show similar changes between volumes of specific structures
+compared to the discrepancies caused by computation environment variability in ~\cite{Gronenschild2012}. 
+In addition, differences in cortical thickness caused by various operating systems, software versions and 
+workstation types were roughly of the same order of magnitude than 
+findings~\cite{kuperberg2003regionally} from patients who suffered from schizophrenia.
+All these evidences show a significant crisis in 
 reproducibility of experiments that should be taken into consideration in 
 scientific communities.
 
-\section{Main Computational Causes of Irreproducibility} 
+\section{Main Causes of Irreproducibility} 
+
+There are a number of reasons that limit the reproducibility of most research,
+which can be simplified into two primary categories: human errors like
+an incomplete specification of processing detail and the computational
+causes of irreproducibility such as software/hardware changes.
 
 The main barrier to reproducibility in many cases is 
-that the analysis program, data, and analytic methods are no longer 
+that the source code, data, and analytic method description are no longer 
 available. Addressing this problem requires the development of a culture of 
-reproducibility among scientific community, which enables the third 
+reproducibility in the scientific community to make sure that data can later be used appropriately,
+which would enable any third 
 party to reproduce the same experiment~\cite{peng2011reproducible, 
 stodden2016enhancing}. 
 
 From the computational point of view, reasons such as the lack of 
-details of the computational environments can contribute to 
-irreproducibility of research results. Analyses need sufficient 
+details of the computational environments can contribute to the
+irreproducibility of research results. Analyses must provide sufficient 
 information on code, software, hardware, and implementation details to 
-be computationally reproducible. In addition, capturing such 
+be computationally reproducible. However, capturing such 
 information is complicated, particularly in domains where results rely 
 on a sequence of complex analyses such as neuroimaging pipelines. 
-To overcome this complexity, a mechanism called provenance capturing is
+To overcome this complexity, a mechanism called provenance capture is
 designed to encompass all dependency information of the computational 
 analysis such as input/output data, processing steps, and 
 detail of computing environments. 
 
-Furthermore, the variety of computational infrastructures including 
+Furthermore, the variety of computational infrastructures, including 
 workstation types, parallelization methods, operating systems, and 
-analysis packages are known to influence reproducibility because of the 
+analysis packages, are known to influence reproducibility because of the 
 creation of small numerical errors~\cite{Gronenschild2012, 
 diethelm2012limits, Glatard2015}. 
-For instance, we will explain further that different order of 
+For example, we explain in the next chapter that different order of 
 summation operation of floating-point numbers can lead to creation of 
 small numerical differences. 
-The propagation and amplification of these tiny 
-errors by analysis pipelines may cause reproducibility issues. We 
-will discuss in more details the effect of each one of these factors in Chapter~\ref{ch:background}.
+The propagation and amplification of these tiny
+differences by analysis pipelines may cause reproducibility issues. We
+will discuss in more detail the effect of computational environments
+on big data processing pipelines in Chapter~\ref{ch:background}.
 
 \section{Analyzing Neuroimaging Data}
 
@@ -217,70 +240,76 @@ resonance imaging (sMRI), functional magnetic resonance imaging (fMRI)
 and diffusion magnetic resonance imaging (dMRI).
 
 Structural neuroimaging deals with the anatomical structure of the brain and helps
-diagnose brain injury and certain diseases such as tumor and stroke.
+diagnose brain injury and certain diseases, such as tumor and stroke.
 The main software packages used for sMRI are 
 CIVET~\cite{ad2006civet}, FreeSurfer~\cite{fischl2012freesurfer}, and 
 FSL (FMRIB Software Library)~\cite{jenkinson2012fsl}. 
-As opposed to structural imaging, functional imaging is used to measure 
-brain function based on 
+Functional imaging is used to measure brain function based on 
 specific tasks completed by subjects such as listening to sounds, 
 reading, or small movements. 
 Functional imaging identifies the areas of 
-the brain that are involved with responding to the tasks. 
-In addition to task-based fMRI, an explicit task may not be performed 
-to identify the functional activity of brain in a resting-state 
-condition (RS-fMRI). The main 
-software packages that implement fMRI processing are SPM (Statistical 
-Parametric Mapping)~\cite{spm}, FSL(FMRIB Software Library)~\cite{jenkinson2012fsl},
+the brain that are involved in these tasks. 
+% In addition to task-based fMRI, an explicit task may not be performed 
+% to identify the functional activity of brain in a resting-state 
+% condition (RS-fMRI). 
+The main software packages that implement fMRI processing are SPM (Statistical 
+Parametric Mapping)~\cite{spm}, FSL (FMRIB Software Library)~\cite{jenkinson2012fsl},
 and AFNI (Analysis of Functional 
 NeuroImages)~\cite{cox1996afni}. Diffusion imaging is another kind of 
 MRI analysis that measures the anatomical connectivity between 
-regions, and the main toolboxes are DIPY (Diffusion Imaging in 
+regions, and its main toolboxes are DIPY (Diffusion Imaging in 
 Python)~\cite{garyfallidis2014dipy}, MRtrix~\cite{tournier2012mrtrix}, 
 and FSL.
 
-Depending on the analysis type, several steps can be involved in a 
+Depending on the MRI analysis, several steps can be involved in a 
 neuroimaging study. Generally, the analysis procedure can be divided into 
-pre-processing and statistical steps. Pre-processing steps are taken 
-to prepare data for the statistical analysis and are common between all 
-analysis modalities, including brain extraction to separate the brain 
+pre-processing and statistical steps. Pre-processing steps 
+prepare data for the statistical analyses and are common between all 
+MRI analyses, including brain extraction to separate the brain 
 tissues from the other parts, or brain alignment which aligns a brain 
-extracted image with a reference image such as the one produced by 
+image with a reference image such as one produced by 
 MNI (Montreal Neuroimaging Institute)~\cite{evans1992anatomical}. 
-After pre-processing steps, depending on the
+After the pre-processing steps, depending on the
 modality of analyses (e.g., sMRI, fMRI, and dMRI), statistical analyses 
-are applied to make inferences.
+are applied to understand the nature of the data and obtain relevant
+results that can be used and interpreted by neuroscientists.
 
 The various pre-processing and analysis steps involved in a 
-neuroimaging experiment are often combined in programs called workflows 
+neuroimaging experiment are often combined in workflows 
 or pipelines. Pipelines are used to automate data analysis and accelerate 
 the processing of complicated analyses. 
 
 
 \section{Thesis Outline}
+% and develop methods around this exploration which enable higher quality and more easily reproducible
+% claims in neuroimaging.
 
-This thesis aims to study the numerical stability of neuroimaging pipelines focusing on the effect
-of operating system variability. For this purpose, we leverage system call interception techniques including the
-ReproZip tool, and perturbation models such as Monte-Carlo Arithmetic (MCA)~\cite{Parker1997-qq} as an extension of
-standard floating-point arithmetic that exploits randomness in basic floating-point operations. 
-This thesis is manuscript-based, meaning that each of the three body chapters, as listed below,
-is an exact copy of either a published or aim to publish manuscript.
+The objective of this thesis is to understand the role that numerical instability plays in the reproducibility of results
+by focusing on the effect of operating system variability.
+For this purpose, we leverage system call interception techniques including the
+ReproZip tool~\cite{rampin2016reprozip}, a tool that tracks the operating system calls.
+We also use perturbation models such as Monte-Carlo arithmetic (MCA)~\cite{Parker1997-qq} 
+as an extension of standard floating-point arithmetic that exploits randomness in basic
+floating-point operations to simulate the numerical errors. 
+This thesis is manuscript-based, meaning that each of the three chapters
+is an exact copy of either a published or to be submitted manuscript.
 % The major contributions of my thesis are listed below as the separate chapters that we published or aim to publish.
 
-C.I – File-based localization of numerical perturbations in data analysis pipelines (Chapter~\ref{ch:c1})
+C.I – File-based localization of numerical perturbations in data analysis pipelines~\cite{salari2020spot} (Chapter~\ref{ch:c1})
 
-C.II – Accurate simulation of operating system updates in neuroimaging using Monte-Carlo arithmetic (Chapter~\ref{ch:c2})
+C.II – Accurate simulation of operating system updates in neuroimaging using Monte-Carlo arithmetic~\cite{salari2021accurate} (Chapter~\ref{ch:c2})
+
 
 C.III – Comparing software variability across and within fMRI analysis packages (Chapter~\ref{ch:c3})
 
 
-In Chapter~\ref{ch:background}, we will review the background material related to this thesis in general.
-Chapter~\ref{ch:c1} will introduce Spot, a tool to detect the source of numerical differences in complex pipelines
-executed in different operating systems. This chapter is completed and published in the
-GigaScience journal. Chapter~\ref{ch:c2} will then study whether the MCA method is a good perturbation
-model for evaluating pipeline stability across operating systems. This chapter is also completed and published
+In Chapter~\ref{ch:background}, we review the background material related to this thesis in general.
+Chapter~\ref{ch:c1} introduce Spot, a tool to detect the source of numerical differences in complex pipelines
+executed on different operating systems. This chapter is completed and published in the
+GigaScience journal. Chapter~\ref{ch:c2} then study whether the MCA method is a good perturbation
+model for evaluating pipeline stability across operating systems. This chapter is published
 in the MICCAI workshop on Uncertainty for Safe Utilization of Machine Learning in Medical Imaging (UNSURE).
-Chapter~\ref{ch:c3} will present a comparison of numerical and software variability through Monte-Carlo arithmetic.
+Chapter~\ref{ch:c3} present a comparison of numerical and software variability through MCA.
 This chapter will be submitted to the Human Brain Mapping (HBM) journal by the end of Winter 2022.
-The thesis will then follow with a discussion and a conclusion in Chapters~\ref{ch:discussion} and ~\ref{ch:conclusion}, respectively.
+The thesis then provide a discussion and a conclusion in Chapter~\ref{ch:discussion}.
 
